@@ -63,9 +63,6 @@ class RealMetricsClient implements MetricsClient {
 }
 
 export const injectTags = <S extends { tags?: string[] }>(series: S[], tags: string[], excludeTags: string[]): S[] => {
-  if (tags.length === 0) {
-    return series
-  }
   return series.map((s) => ({ ...s, tags: [...(s.tags ?? []), ...tags].filter(t => {
     core.info(JSON.stringify({excludeTags, t, keep: excludeTags.indexOf(t.split(':')[0]) == -1}))
     return excludeTags.indexOf(t.split(':')[0]) == -1
