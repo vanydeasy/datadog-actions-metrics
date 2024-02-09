@@ -22,6 +22,7 @@ type Inputs = {
 }
 
 export const run = async (context: GitHubContext, inputs: Inputs): Promise<void> => {
+  core.info(JSON.stringify(inputs));
   const metricsClient = createMetricsClient(inputs)
 
   await handleEvent(metricsClient, context, inputs)
